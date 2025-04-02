@@ -1,4 +1,4 @@
-package trex.ads.adjust
+package trex.ads.core.adjust
 
 import android.content.Context
 import android.util.Log

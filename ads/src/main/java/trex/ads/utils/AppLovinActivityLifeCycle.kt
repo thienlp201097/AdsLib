@@ -1,10 +1,10 @@
-package trex.ads
+package trex.ads.utils
 
 import android.app.Dialog
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import trex.ads.utils.SweetAlert.SweetAlertDialog
+import trex.ads.core.AppOpenManager
 
 class DialogHelperActivityLifeCycle(val dialog: Dialog) : LifecycleObserver {
 

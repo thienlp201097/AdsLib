@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.lib.dktechads"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.lib.dktechads"
-        minSdk = 23
-        targetSdk = 34
+        minSdk = 25
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -52,7 +52,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(project (":ads"))
-    implementation("com.applovin:applovin-sdk:13.0.0")
-    implementation("com.google.android.gms:play-services-ads:24.0.0")
-    implementation("com.google.ads.mediation:applovin:13.0.0.1")
+    implementation("com.applovin:applovin-sdk:13.1.0")
+    implementation("com.google.android.gms:play-services-ads:24.1.0")
+    implementation("com.google.ads.mediation:applovin:13.1.0.1")
 }

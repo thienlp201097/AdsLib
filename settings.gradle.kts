@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "DktechAds"
+rootProject.name = "AdsLib"
 include(":app")
 include(":ads")

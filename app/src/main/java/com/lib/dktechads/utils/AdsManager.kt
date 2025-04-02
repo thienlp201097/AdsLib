@@ -7,25 +7,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
-import trex.ads.AdmobUtils
-import trex.ads.AdmobUtils.AdsNativeCallBackAdmod
-import trex.ads.AppOpenManager
-import trex.ads.ApplovinUtil
-import trex.ads.GoogleENative
-import trex.ads.callback_applovin.InterstititialCallback
-import trex.ads.callback_applovin.InterstititialCallbackNew
-import trex.ads.callback_applovin.NativeCallBackNew
+import trex.ads.core.AppOpenManager
+import trex.ads.core.ApplovinLib
+import trex.ads.utils.GoogleENative
+import trex.ads.alv_callback.InterstititialCallback
+import trex.ads.alv_callback.InterstititialCallbackNew
+import trex.ads.alv_callback.NativeCallBackNew
 import trex.ads.utils.InterHolder
 import trex.ads.utils.NativeHolder
-import trex.ads.utils.admod.NativeHolderAdmob
 import com.applovin.mediation.MaxAd
-import com.applovin.mediation.MaxError
 import com.applovin.mediation.ads.MaxInterstitialAd
-import com.applovin.mediation.nativeAds.MaxNativeAdListener
 import com.applovin.mediation.nativeAds.MaxNativeAdLoader
 import com.applovin.mediation.nativeAds.MaxNativeAdView
-import com.google.android.gms.ads.AdValue
-import com.lib.dktechads.R
 
 
 object AdsManager {
@@ -34,7 +27,7 @@ object AdsManager {
     var banner = "f443c90308f39f17"
 
     fun showAdsNative(activity: Activity, nativeHolder: NativeHolder,viewGroup: ViewGroup){
-        ApplovinUtil.loadAndShowNativeAds(activity,nativeHolder,viewGroup,
+        ApplovinLib.loadAndShowNativeAds(activity,nativeHolder,viewGroup,
             GoogleENative.UNIFIED_MEDIUM,object :
                 NativeCallBackNew {
             override fun onNativeAdLoaded(nativeAd: MaxAd?, nativeAdView: MaxNativeAdView?) {
@@ -53,7 +46,7 @@ object AdsManager {
 
 
     fun loadInter(context: Context){
-        ApplovinUtil.loadAnGetInterstitials(context, interHolder,object :
+        ApplovinLib.loadAnGetInterstitials(context, interHolder,object :
             InterstititialCallbackNew {
             override fun onInterstitialReady(interstitialAd: MaxInterstitialAd) {
 //                Toast.makeText(context,"Loaded",Toast.LENGTH_SHORT).show()
@@ -78,7 +71,7 @@ object AdsManager {
     }
 
     fun showInter(context: AppCompatActivity,interHolder: InterHolder,adsOnClick: AdsOnClick){
-        ApplovinUtil.showInterstitialsWithDialogCheckTimeNew(context, 800,interHolder ,object :
+        ApplovinLib.showInterstitialsWithDialogCheckTimeNew(context, 800,interHolder ,object :
             InterstititialCallbackNew {
             override fun onInterstitialReady(interstitialAd : MaxInterstitialAd) {
                 Toast.makeText(context,"Ready",Toast.LENGTH_SHORT).show()
@@ -117,7 +110,7 @@ object AdsManager {
     var native_mutable: MutableLiveData<MaxAd> = MutableLiveData()
 
     fun loadAndShowIntersial(activity: Activity, idAd: InterHolder,adsOnClick: AdsOnClick){
-        ApplovinUtil.loadAndShowInterstitialsWithDialogCheckTime(activity as AppCompatActivity,idAd, object :
+        ApplovinLib.loadAndShowInterstitialsWithDialogCheckTime(activity as AppCompatActivity,idAd, object :
             InterstititialCallback {
             override fun onInterstitialReady() {
                 AppOpenManager.getInstance().isAppResumeEnabled = false

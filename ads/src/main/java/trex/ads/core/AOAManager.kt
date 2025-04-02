@@ -1,4 +1,4 @@
-package trex.ads
+package trex.ads.core
 
 import android.app.Activity
 import android.app.Dialog
@@ -11,7 +11,7 @@ import android.view.View
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.TextView
-import trex.ads.adjust.AdjustUtils
+import trex.ads.core.adjust.AdjustUtils
 import com.airbnb.lottie.LottieAnimationView
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
@@ -23,6 +23,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import trex.ads.R
 
 class AOAManager(private val activity: Activity,val appOpen: String,val timeOut: Long, val appOpenAdsListener: AppOpenAdsListener) {
     private var appOpenAd: AppOpenAd? = null
@@ -40,10 +41,10 @@ class AOAManager(private val activity: Activity,val appOpen: String,val timeOut:
     fun loadAoA() {
         Log.d("===Load","id1")
         var idAoa = appOpen
-        if (AdmobUtils.isTesting){
+        if (AdmobLib.isTesting){
             idAoa = activity.getString(R.string.test_ads_admob_app_open_new)
         }
-        if (!AdmobUtils.isShowAds){
+        if (!AdmobLib.isShowAds){
             appOpenAdsListener.onAdsFailed("isShowAds false")
             return
         }

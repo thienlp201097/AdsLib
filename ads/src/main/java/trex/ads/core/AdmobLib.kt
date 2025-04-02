@@ -1,4 +1,4 @@
-package trex.ads
+package trex.ads.core
 
 import android.app.Activity
 import android.app.Dialog
@@ -16,15 +16,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
-import trex.ads.NativeFunc.Companion.populateNativeAdView
-import trex.ads.NativeFunc.Companion.populateNativeAdViewClose
-import trex.ads.NativeFunc.Companion.populateNativeAdViewNoBtn
-import trex.ads.adjust.AdjustUtils
+import trex.ads.utils.NativeFunc.Companion.populateNativeAdView
+import trex.ads.utils.NativeFunc.Companion.populateNativeAdViewClose
+import trex.ads.utils.NativeFunc.Companion.populateNativeAdViewNoBtn
+import trex.ads.core.adjust.AdjustUtils
 import trex.ads.utils.SweetAlert.SweetAlertDialog
 import trex.ads.utils.admod.BannerHolderAdmob
 import trex.ads.utils.admod.InterHolderAdmob
@@ -54,9 +53,7 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.OnPaidEventListener
-import com.google.android.gms.ads.RequestConfiguration
 import com.google.android.gms.ads.VideoOptions
-import com.google.android.gms.ads.initialization.InitializationStatus
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.ads.nativead.NativeAd
@@ -72,12 +69,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import trex.ads.R
+import trex.ads.utils.CollapsibleBanner
+import trex.ads.utils.GoogleEBanner
+import trex.ads.utils.GoogleENative
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.Date
 import java.util.Locale
 
-object AdmobUtils {
+object AdmobLib {
     //Dialog loading
     @JvmField
     var dialog: SweetAlertDialog? = null

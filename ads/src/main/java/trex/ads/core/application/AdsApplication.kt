@@ -1,4 +1,4 @@
-package trex.ads.application
+package trex.ads.core.application
 
 import android.app.Activity
 import android.app.Application

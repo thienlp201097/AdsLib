@@ -1,4 +1,4 @@
-package trex.ads
+package trex.ads.core
 
 import android.app.Activity
 import android.app.Application
@@ -15,22 +15,15 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.FrameLayout
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import com.adjust.sdk.Adjust
-import com.adjust.sdk.AdjustAdRevenue
-import com.adjust.sdk.AdjustConfig
 import com.airbnb.lottie.LottieAnimationView
 import com.applovin.mediation.MaxAd
-import com.applovin.mediation.MaxAdFormat
 import com.applovin.mediation.MaxAdListener
-import com.applovin.mediation.MaxAdRevenueListener
 import com.applovin.mediation.MaxAdViewAdListener
 import com.applovin.mediation.MaxError
 import com.applovin.mediation.MaxReward
@@ -46,13 +39,12 @@ import com.applovin.sdk.AppLovinMediationProvider
 import com.applovin.sdk.AppLovinSdk
 import com.applovin.sdk.AppLovinSdkInitializationConfiguration
 import com.applovin.sdk.AppLovinSdkUtils
-import trex.ads.adjust.AdjustUtils
-import trex.ads.callback_applovin.BannerCallback
-import trex.ads.callback_applovin.InterstititialCallback
-import trex.ads.callback_applovin.InterstititialCallbackNew
-import trex.ads.callback_applovin.NativeAdCallback
-import trex.ads.callback_applovin.NativeCallBackNew
-import trex.ads.callback_applovin.RewardCallback
+import trex.ads.core.adjust.AdjustUtils
+import trex.ads.alv_callback.BannerCallback
+import trex.ads.alv_callback.InterstititialCallback
+import trex.ads.alv_callback.InterstititialCallbackNew
+import trex.ads.alv_callback.NativeCallBackNew
+import trex.ads.alv_callback.RewardCallback
 import trex.ads.utils.InterHolder
 import trex.ads.utils.NativeHolder
 import trex.ads.utils.SweetAlert.SweetAlertDialog
@@ -61,11 +53,14 @@ import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import trex.ads.R
+import trex.ads.utils.DialogHelperActivityLifeCycle
+import trex.ads.utils.GoogleENative
 import java.util.Collections
 import java.util.concurrent.Executors
 
 
-object ApplovinUtil : LifecycleObserver {
+object ApplovinLib : LifecycleObserver {
 
     var enableAds = true
     var isInterstitialAdShowing = false
@@ -82,7 +77,7 @@ object ApplovinUtil : LifecycleObserver {
     var isClickAds = false
     fun initApplovin(application: Application,SDK_KEY : String, testAds : Boolean, enableAds: Boolean, initialization: Initialization) {
         isClickAds = false
-        this.enableAds = enableAds
+        ApplovinLib.enableAds = enableAds
         val executor = Executors.newSingleThreadExecutor()
         executor.execute {
             val initConfigBuilder = AppLovinSdkInitializationConfiguration.builder(SDK_KEY, application)

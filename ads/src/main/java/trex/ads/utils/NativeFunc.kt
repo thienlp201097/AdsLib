@@ -1,4 +1,4 @@
-package trex.ads
+package trex.ads.utils
 
 import android.content.Context
 import android.os.Build
@@ -11,6 +11,8 @@ import com.google.android.gms.ads.VideoController
 import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
+import trex.ads.R
+import trex.ads.core.AdmobLib
 
 class NativeFunc {
 
@@ -229,7 +231,7 @@ class NativeFunc {
         fun populateNativeAdViewClose(
             nativeAd: NativeAd,
             adView: NativeAdView,
-            size: GoogleENative, nativeAdCallbackNew: AdmobUtils.NativeAdCallbackNew
+            size: GoogleENative, nativeAdCallbackNew: AdmobLib.NativeAdCallbackNew
         ) {
             if (nativeAd == null || adView == null || size == null) {
                 return

@@ -6,10 +6,10 @@ plugins {
 
 android {
     namespace = "trex.ads"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
-        minSdk = 23
+        minSdk = 25
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

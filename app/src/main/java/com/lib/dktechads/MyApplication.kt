@@ -1,8 +1,8 @@
 package com.lib.dktechads
 
-import trex.ads.AppOpenManager
-import trex.ads.adjust.AdjustUtils
-import trex.ads.application.AdsApplication
+import trex.ads.core.AppOpenManager
+import trex.ads.core.adjust.AdjustUtils
+import trex.ads.core.application.AdsApplication
 
 class MyApplication : AdsApplication() {
     override fun onCreateApplication() {

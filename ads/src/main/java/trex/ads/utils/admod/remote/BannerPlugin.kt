@@ -5,7 +5,7 @@ import android.app.Activity
 import android.util.Log
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
-import trex.ads.AdmobUtils
+import trex.ads.core.AdmobLib
 import trex.ads.R
 import com.facebook.shimmer.ShimmerFrameLayout
 import trex.ads.utils.admod.remote.BannerPlugin.BannerConfig.Companion.TYPE_ADAPTIVE
@@ -76,7 +76,7 @@ class BannerPlugin(
         this.defaultBannerType = BannerType.Adaptive
         this.defaultRefreshRateSec = 10
         this.defaultCBFetchIntervalSec = 20
-        this.loadAdAfterInit = AdmobUtils.isShowAds
+        this.loadAdAfterInit = AdmobLib.isShowAds
     }
 
     init {
@@ -96,7 +96,7 @@ class BannerPlugin(
         var cbFetchIntervalSec = config.defaultCBFetchIntervalSec
         var refreshRateSec: Int? = config.defaultRefreshRateSec
 
-        if (AdmobUtils.isTesting) {
+        if (AdmobLib.isTesting) {
             adUnitId = activity.getString(R.string.test_ads_admob_banner_collapsible_id)
         }
         bannerType = when (bannerConfig?.type) {

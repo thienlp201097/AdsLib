@@ -9,12 +9,12 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import trex.ads.AdmobUtils
-import trex.ads.ApplovinUtil
-import trex.ads.GoogleENative
-import trex.ads.callback_applovin.BannerCallback
-import trex.ads.callback_applovin.NativeCallBackNew
-import trex.ads.callback_applovin.RewardCallback
+import trex.ads.core.AdmobLib
+import trex.ads.core.ApplovinLib
+import trex.ads.utils.GoogleENative
+import trex.ads.alv_callback.BannerCallback
+import trex.ads.alv_callback.NativeCallBackNew
+import trex.ads.alv_callback.RewardCallback
 import trex.ads.utils.admod.RewardHolderAdmob
 import trex.ads.utils.admod.RewardedInterstitialHolderAdmob
 import trex.ads.utils.admod.callback.AdLoadCallback
@@ -93,9 +93,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnShowReward.setOnClickListener {
-            ApplovinUtil.loadReward(this, "c10d259dcb47378d", 15000, object : RewardCallback {
+            ApplovinLib.loadReward(this, "c10d259dcb47378d", 15000, object : RewardCallback {
                 override fun onRewardReady() {
-                    ApplovinUtil.showRewardWithDialogCheckTime(
+                    ApplovinLib.showRewardWithDialogCheckTime(
                         this@MainActivity,
                         1500,
                         object : RewardCallback {
@@ -169,7 +169,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.loadNativeMax.setOnClickListener {
-            ApplovinUtil.loadNativeAds(this,AdsManager.nativeHolder,object : NativeCallBackNew {
+            ApplovinLib.loadNativeAds(this,AdsManager.nativeHolder,object : NativeCallBackNew {
                 override fun onNativeAdLoaded(nativeAd: MaxAd?, nativeAdView: MaxNativeAdView?) {
                     Toast.makeText(this@MainActivity,"Loaded", Toast.LENGTH_SHORT).show()
                 }
@@ -190,7 +190,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.showNativeMax.setOnClickListener {
-            ApplovinUtil.showNativeWithLayout(nativeAds,this,AdsManager.nativeHolder,R.layout.native_custom_ad_view,GoogleENative.UNIFIED_MEDIUM,object :
+            ApplovinLib.showNativeWithLayout(nativeAds,this,AdsManager.nativeHolder,R.layout.native_custom_ad_view,
+                GoogleENative.UNIFIED_MEDIUM,object :
                 NativeCallBackNew {
                 override fun onNativeAdLoaded(nativeAd: MaxAd?, nativeAdView: MaxNativeAdView?) {
                     Toast.makeText(this@MainActivity,"show success", Toast.LENGTH_SHORT).show()
@@ -220,8 +221,8 @@ class MainActivity : AppCompatActivity() {
 //                override fun onPaid(adValue: AdValue?, mAdView: AdView?) {
 //                }
 //            })
-            AdmobUtils.loadAndShowBannerWithConfig(this,"",5,10,binding.bannerContainer,
-                BannerPlugin.BannerConfig.TYPE_ADAPTIVE,object : AdmobUtils.BannerCollapsibleAdCallback{
+            AdmobLib.loadAndShowBannerWithConfig(this,"",5,10,binding.bannerContainer,
+                BannerPlugin.BannerConfig.TYPE_ADAPTIVE,object : AdmobLib.BannerCollapsibleAdCallback{
                 override fun onClickAds() {
 
                 }
@@ -239,7 +240,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.bannerMax.setOnClickListener {
-            ApplovinUtil.showBanner(this, binding.bannerContainer, "f443c90308f39f17", object :
+            ApplovinLib.showBanner(this, binding.bannerContainer, "f443c90308f39f17", object :
                 BannerCallback {
                 override fun onBannerLoadFail(error: String) {
                 }
@@ -254,7 +255,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnLoadShowInterAdmob.setOnClickListener {
-            AdmobUtils.loadAndShowAdInterstitial(this, AdsManagerAdmod.interholder,object :
+            AdmobLib.loadAndShowAdInterstitial(this, AdsManagerAdmod.interholder,object :
                 AdsInterCallBack {
                 override fun onStartAction() {
 
@@ -287,9 +288,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.loadAndShowNativeAdmob.setOnClickListener {
-            AdmobUtils.loadAndShowNativeAdsWithLayoutAdsCollapsible(this,
-                AdsManagerAdmod.nativeHolder,binding.nativead,R.layout.ad_template_medium,GoogleENative.UNIFIED_MEDIUM,object :
-                AdmobUtils.NativeAdCallbackNew {
+            AdmobLib.loadAndShowNativeAdsWithLayoutAdsCollapsible(this,
+                AdsManagerAdmod.nativeHolder,binding.nativead,R.layout.ad_template_medium,
+                GoogleENative.UNIFIED_MEDIUM,object :
+                AdmobLib.NativeAdCallbackNew {
                 override fun onLoadedAndGetNativeAd(ad: NativeAd?) {
 
                 }
@@ -315,7 +317,7 @@ class MainActivity : AppCompatActivity() {
         }
         
         binding.loadReward.setOnClickListener { 
-            AdmobUtils.loadAdReward(this@MainActivity,rewardHolder ,object : AdLoadCallback{
+            AdmobLib.loadAdReward(this@MainActivity,rewardHolder ,object : AdLoadCallback{
                     override fun onAdFail(message: String?) {
                         
                     }
@@ -357,14 +359,14 @@ class MainActivity : AppCompatActivity() {
 //
 //            })
             
-            AdmobUtils.loadAndShowRewardedInterstitialAdWithCallback(this,"",object : RewardAdCallback{
+            AdmobLib.loadAndShowRewardedInterstitialAdWithCallback(this,"",object : RewardAdCallback{
                 override fun onAdClosed() {
                     
                 }
 
                 override fun onAdShowed() {
                     Handler().postDelayed({
-                        AdmobUtils.dismissAdDialog()
+                        AdmobLib.dismissAdDialog()
                     },200)
                 }
 
@@ -398,8 +400,8 @@ class MainActivity : AppCompatActivity() {
 //                }
 //            })
 
-        AdmobUtils.loadAndGetNativeFullScreenAds(this,AdsManagerAdmod.nativeHolderFull,MediaAspectRatio.ANY,
-            object : AdmobUtils.NativeAdCallbackNew {
+        AdmobLib.loadAndGetNativeFullScreenAds(this,AdsManagerAdmod.nativeHolderFull,MediaAspectRatio.ANY,
+            object : AdmobLib.NativeAdCallbackNew {
                 override fun onLoadedAndGetNativeAd(ad: NativeAd?) {
                     Log.d("==full==", "Load onNativeAdLoaded: ")
                 }

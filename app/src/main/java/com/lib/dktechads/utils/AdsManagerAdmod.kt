@@ -8,11 +8,10 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
-import trex.ads.AdmobUtils
-import trex.ads.AdmobUtils.AdsNativeCallBackAdmod
-import trex.ads.AppOpenManager
-import trex.ads.GoogleENative
+import trex.ads.core.AdmobLib
+import trex.ads.core.AdmobLib.AdsNativeCallBackAdmod
+import trex.ads.core.AppOpenManager
+import trex.ads.utils.GoogleENative
 import trex.ads.utils.Utils
 import trex.ads.utils.admod.InterHolderAdmob
 import trex.ads.utils.admod.NativeHolderAdmob
@@ -30,7 +29,7 @@ object AdsManagerAdmod {
     var interholder = InterHolderAdmob("ca-app-pub-3940256099942544/1033173712")
 
     fun loadInter(context: Context, interHolder: InterHolderAdmob) {
-        AdmobUtils.loadAndGetAdInterstitial(context,interHolder,
+        AdmobLib.loadAndGetAdInterstitial(context,interHolder,
             object :
                 AdCallBackInterLoad {
                 override fun onAdClosed() {
@@ -69,7 +68,7 @@ object AdsManagerAdmod {
         adListener: AdListener,
         enableLoadingDialog: Boolean
     ) {
-        AdmobUtils.showAdInterstitialWithCallbackNotLoadNew(
+        AdmobLib.showAdInterstitialWithCallbackNotLoadNew(
             context as Activity,interHolder,10000, object :
                 AdsInterCallBack {
                 override fun onAdLoaded() {
@@ -109,7 +108,7 @@ object AdsManagerAdmod {
     }
 
     fun loadAdsNativeNew(context: Context, holder: NativeHolderAdmob) {
-        AdmobUtils.loadAndGetNativeAds(
+        AdmobLib.loadAndGetNativeAds(
             context,
             holder,
             object : NativeAdmobCallback {
@@ -129,11 +128,11 @@ object AdsManagerAdmod {
     }
 
     fun showNative(activity: Activity, viewGroup: ViewGroup, holder: NativeHolderAdmob) {
-        if (!AdmobUtils.isNetworkConnected(activity)) {
+        if (!AdmobLib.isNetworkConnected(activity)) {
             viewGroup.visibility = View.GONE
             return
         }
-        AdmobUtils.showNativeAdsWithLayout(activity, holder, viewGroup, R.layout.ad_unified_medium, GoogleENative.UNIFIED_BANNER, object : AdmobUtils.AdsNativeCallBackAdmod {
+        AdmobLib.showNativeAdsWithLayout(activity, holder, viewGroup, R.layout.ad_unified_medium, GoogleENative.UNIFIED_BANNER, object : AdmobLib.AdsNativeCallBackAdmod {
             override fun NativeLoaded() {
                 Utils.getInstance().showMessenger(activity, "onNativeShow")
             }
@@ -149,7 +148,7 @@ object AdsManagerAdmod {
     }
 
     fun showAdsNativeFullScreen(activity: Activity, nativeHolder: NativeHolderAdmob,viewGroup: ViewGroup){
-        AdmobUtils.showNativeFullScreenAdsWithLayout(activity,nativeHolder,viewGroup,
+        AdmobLib.showNativeFullScreenAdsWithLayout(activity,nativeHolder,viewGroup,
             R.layout.ad_native_fullscreen,object :
                 AdsNativeCallBackAdmod {
                 override fun NativeLoaded() {
@@ -174,7 +173,7 @@ object AdsManagerAdmod {
     ) {
 
         AppOpenManager.getInstance().isAppResumeEnabled = true
-        AdmobUtils.loadAndShowAdInterstitial(
+        AdmobLib.loadAndShowAdInterstitial(
             context as AppCompatActivity,
             interHolder,
             object : AdsInterCallBack {
@@ -190,7 +189,7 @@ object AdsManagerAdmod {
                     AppOpenManager.getInstance().isAppResumeEnabled = false
                     Handler(Looper.getMainLooper()).postDelayed({
                         try {
-                            AdmobUtils.dismissAdDialog()
+                            AdmobLib.dismissAdDialog()
                         } catch (_: Exception) {
 
                         }

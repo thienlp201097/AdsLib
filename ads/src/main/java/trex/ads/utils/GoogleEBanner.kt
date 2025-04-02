@@ -1,4 +1,4 @@
-package trex.ads
+package trex.ads.utils
 
 enum class GoogleEBanner {
     UNIFIED_TOP,

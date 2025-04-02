@@ -1,4 +1,4 @@
-//package trex.ads
+package trex.ads.utils//package trex.ads
 //
 //import android.app.Activity
 //import android.app.Application

@@ -1,4 +1,4 @@
-package trex.ads.callback_applovin
+package trex.ads.alv_callback
 
 import com.applovin.mediation.MaxAd
 

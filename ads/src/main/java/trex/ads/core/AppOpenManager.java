@@ -1,4 +1,4 @@
-package trex.ads;
+package trex.ads.core;
 
 import android.app.Activity;
 import android.app.Application;
@@ -12,20 +12,18 @@ import android.util.Log;
 import android.view.Window;
 import android.widget.LinearLayout;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
-import trex.ads.adjust.AdjustUtils;
+import trex.ads.R;
+
 import com.google.android.gms.ads.AdActivity;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdValue;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.OnPaidEventListener;
 import com.google.android.gms.ads.appopen.AppOpenAd;
 
 import java.util.ArrayList;
@@ -95,7 +93,7 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
         isInitialized = true;
         this.myApplication = application;
         initAdRequest();
-        if (AdmobUtils.isTesting) {
+        if (AdmobLib.isTesting) {
             this.appResumeAdId = application.getString(R.string.test_ads_admob_app_open_new);
 
         } else {
@@ -389,14 +387,14 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
                 if (currentActivity.getClass() == AdActivity.class){
                     return;
                 }
-                if (ApplovinUtil.INSTANCE.isClickAds()){
-                    ApplovinUtil.INSTANCE.setClickAds(false);
+                if (ApplovinLib.INSTANCE.isClickAds()){
+                    ApplovinLib.INSTANCE.setClickAds(false);
                     return;
                 }
-                if(AdmobUtils.isAdShowing){
+                if(AdmobLib.isAdShowing){
                     return;
                 }
-                if (!AdmobUtils.isShowAds) {
+                if (!AdmobLib.isShowAds) {
                     return;
                 }
 
@@ -404,8 +402,8 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
                     Log.d("===Onresume", "isAppResumeEnabled");
                     return;
                 } else {
-                    if(AdmobUtils.dialog != null && AdmobUtils.dialog.isShowing())
-                        AdmobUtils.dialog.dismiss();
+                    if(AdmobLib.dialog != null && AdmobLib.dialog.isShowing())
+                        AdmobLib.dialog.dismiss();
                 }
 
                 for (Class activity : disabledAppOpenList) {

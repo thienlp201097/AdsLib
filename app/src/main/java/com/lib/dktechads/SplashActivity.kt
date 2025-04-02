@@ -1,22 +1,15 @@
 package com.lib.dktechads
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import trex.ads.AdmobUtils
-import trex.ads.AppOpenManager
-import trex.ads.ApplovinUtil
+import trex.ads.core.AdmobLib
+import trex.ads.core.AppOpenManager
 import trex.ads.R
-import trex.ads.callback_applovin.NativeCallBackNew
 import trex.ads.utils.Utils
 import trex.ads.utils.admod.callback.MobileAdsListener
-import com.applovin.mediation.MaxAd
-import com.applovin.mediation.nativeAds.MaxNativeAdView
 import com.lib.dktechads.databinding.ActivitySplashBinding
-import com.lib.dktechads.utils.AdsManager
 import com.lib.dktechads.utils.AdsManagerAdmod
 
 
@@ -29,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
         val binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        AdmobUtils.initAdmob(this, isDebug = true, isEnableAds = true, object : MobileAdsListener {
+        AdmobLib.initAdmob(this, isDebug = true, isEnableAds = true, object : MobileAdsListener {
             override fun onSuccess() {
                 Log.d("==initAdmob==", "initAdmob onSuccess: ")
                 AppOpenManager.getInstance()
